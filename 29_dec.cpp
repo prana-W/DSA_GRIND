@@ -159,6 +159,7 @@ delete [] arr;
 
     
 {
+    /*
     //Lecture-30 (Important keywords)
 
     cout << PI << endl;
@@ -178,10 +179,12 @@ wtf (2, 3, 6, 8);
 wtf (2, 3, 6);
 wtf (2, 3);
 
-const int y;
-y = 5;
+// const int y;//const must be initilased during declarartion
+// y = 5;
 
+const int val = 5;
+cout << val << endl;
 
-
+*/
 }
 }
