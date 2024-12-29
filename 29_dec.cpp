@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//Lect-(28, 28, 30) revision
+//Lect-(28, 29, 30) revision
 
 //Dynamic memory allocation for 1-d
 //for 2d
