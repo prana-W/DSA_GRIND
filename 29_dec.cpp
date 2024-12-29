@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+//Dynamic memory allocation for 1-d
+//for 2d
+//Jaggered array
+//Lect-(28, 28, 30) revision
+
 
 //creating a 1-D array dynamically
 void create_arr (int *arr, int n) {
