@@ -9,7 +9,6 @@ using namespace std;
 //Important Keywords
 
 //(note: never use ; at the end of a macro)
-
 #define PI 3.1456//object-like macro
 #define DATE DAY//chain macro
 #define DAY 27
