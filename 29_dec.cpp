@@ -17,6 +17,8 @@ void print_arr (int *arr, int n) {
 }
  
 int main() {
+
+    {
 //     int n;
 //     cin >> n;
 
@@ -29,37 +31,88 @@ int main() {
 //     delete []arr;
 
 //     print_arr (arr, n);
+    }
 
+    {
 
-    int row, col;
-    cin >> row >> col;
+//     int row, col;
+//     cin >> row >> col;
 
-//2-D array using dynamic memory allocation
-int **arr2D = new int* [row];
+// //2-D array using dynamic memory allocation
+// int **arr2D = new int* [row];
+// for (int i = 0; i < row; i++) {
+//     *(arr2D+i) = new int[col];
+// }
+
+// //creating a 2-d array
+// for (int i = 0; i < row; i++) {
+//     for (int j = 0; j < col; j++) {
+//         cin >> *(*(arr2D+i) + j);
+//     }
+// }
+
+// //printing
+// for (int i = 0; i < row; i++) {
+//     for (int j = 0; j < col; j++) {
+//         cout << arr2D[i][j] << " ";
+//     }
+//     cout << endl;
+// }
+
+// for (int i = 0; i < row; i++) {
+//     delete [] arr2D[i];
+// }
+
+// delete [] arr2D;
+    }
+{
+//dynamically creating jaggered array
+
+int row;
+cout << "Enter the no. of rows: " << endl;
+cin >> row;
+
+int** arr = new int* [row];
+
+cout << "Enter the no. of col in each row: " << endl;
+
+//creating a size array for each array correaponding to a row
+int *size = new int [row];
 for (int i = 0; i < row; i++) {
-    *(arr2D+i) = new int[col];
+    cin >> size[i];
 }
 
-//creating a 2-d array
+
 for (int i = 0; i < row; i++) {
-    for (int j = 0; j < col; j++) {
-        cin >> *(*(arr2D+i) + j);
+    arr[i] = new int [size[i]];
+}
+
+cout << "Enter the elements: " << endl;
+//creating array
+for (int i = 0; i < row; i++) {
+    for (int j = 0; j < size[i]; j++) {
+        cin >> arr[i][j];
     }
 }
 
-//printing
+cout << "The array is: " << endl;
+//Printitng the jaggered array
 for (int i = 0; i < row; i++) {
-    for (int j = 0; j < col; j++) {
-        cout << arr2D[i][j] << " ";
+    for (int j = 0; j < size[i]; j++) {
+        cout << arr[i][j] << " ";
     }
+
     cout << endl;
 }
 
+//releasing memory
+delete [] size;
 for (int i = 0; i < row; i++) {
-    delete [] arr2D[i];
+    delete [] arr[i];
 }
+delete [] arr;
 
-delete [] arr2D;
+}
 
     
 
