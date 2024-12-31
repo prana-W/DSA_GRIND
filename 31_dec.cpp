@@ -135,10 +135,46 @@ int totalOccurence (int* arr, int size, int key, int s, int e, int ans = -1) {
 //Peak in a mountain
 int peakMountain (int* arr, int size, int s, int e) {
 
+    int mid = s + (e-s)/2;
+    if (s > e) {
+        return mid; // base case
+    }
+
+    if (arr[mid] < arr[mid+1]) {
+        return peakMountain(arr, size, mid+1, e);
+    }
+    else if (arr[mid] > arr[mid+1] && arr[mid] > arr[mid-1]) {
+        return mid;
+    }
+
+    else {
+        return peakMountain(arr, size, s, mid-1);
+    }
+}
+
+//Pivot in an Array
+int pivotIndex (int* arr, int size, int s, int e) {
+    int mid = s + (e-s)/2;
+
+    if (s > e) {
+        return mid;
+    }
+
+    if (arr[mid] >= arr[0]) {
+        return pivotIndex(arr, size, mid+1, e);
+    }
+
+    else if (arr[mid] < arr[mid-1]) {
+        return mid;
+    }
+
+    else {
+        return pivotIndex (arr, size, s, mid-1);
+    }
 }
 
 int main() {
-int arr[] = {2,3, 6, 6, 6, 8, 8, 9, 9, 10};
+int arr[] = { 1, 2, 3, 7, 9};
 int n = sizeof(arr)/sizeof(int);
 
 // if (isSorted(arr, 3)) cout << "yeahhh!" << endl;
@@ -151,16 +187,20 @@ int n = sizeof(arr)/sizeof(int);
 // else cout << "Not yoooo!";
 
 //first occurence
-int key = 8;
+// int key = 8;
 
-cout << "By loop: " << firstOccurence_loops (arr, n, key) << endl;
-cout << "By recursion: " << firstOccurrence (arr, n, key, 0, n-1) << endl << endl;
-
-
-cout << "By recursion: " << lastOccurrence (arr, n, key, 0, n-1) << endl << endl;
+// cout << "By loop: " << firstOccurence_loops (arr, n, key) << endl;
+// cout << "By recursion: " << firstOccurrence (arr, n, key, 0, n-1) << endl << endl;
 
 
-cout << "By recursion: " << totalOccurence (arr, n, key, 0, n-1) << endl;
+// cout << "By recursion: " << lastOccurrence (arr, n, key, 0, n-1) << endl << endl;
+
+
+// cout << "By recursion: " << totalOccurence (arr, n, key, 0, n-1) << endl;
+
+// cout << "Peak index: " << peakMountain(arr, n, 0, n-1) << endl;
+
+cout << "Pivot Index: " << pivotIndex(arr, n, 0, n-1) << endl;
 
 
 }
