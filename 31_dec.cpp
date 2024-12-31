@@ -17,7 +17,6 @@ bool isSorted (int* arr, int size) {
     }
 }
 
-
 //make a recursive function that returns the sum of the array
 int getSum (int* arr, int size) {
     if (size == 0) return 0;
@@ -86,25 +85,57 @@ int firstOccurence_loops (int* arr, int size, int key) {
 }
 
 //doing by recursion
-    int firstOccurrence (int* arr, int size, int key, int s, int e, int ans = -1) {
+int firstOccurrence (int* arr, int size, int key, int s, int e, int ans = -1) {
         if (s > e) return ans; //base case
 
         int mid = s + (e-s)/2;
 
         //Recursive calls
         if (arr[mid] == key) {
-            return firstOccurrence(arr, size, key, s, mid-1, mid);
+            ans = mid;
+            return firstOccurrence(arr, size, key, s, mid-1, ans); // e = mid-1
         }
 
         else if (arr[mid] < key) {
-            return firstOccurrence (arr, size, key, mid+1, e, ans);
+            return firstOccurrence (arr, size, key, mid+1, e, ans); // s = mid+1
         }
 
         else {
-            return firstOccurrence (arr, size, key, s, mid-1, ans);
+            return firstOccurrence (arr, size, key, s, mid-1, ans); // e= mid-1
         }
     }
 
+int lastOccurrence (int*  arr, int size, int key, int s, int e, int ans = -1) {
+    if (s > e) return ans; //base case
+
+int mid = s + (e-s)/2;
+
+    if (arr[mid] == key) {
+        ans = mid;
+        return lastOccurrence (arr, size, key, mid+1, e, ans);
+    }
+
+    else if (arr[mid] < key) {
+        return lastOccurrence(arr, size, key, mid+1, e, ans);
+    }
+
+    else {
+        return lastOccurrence(arr, size, key, s, mid-1, ans);
+    }
+
+}
+
+int totalOccurence (int* arr, int size, int key, int s, int e, int ans = -1) {
+    if (firstOccurrence(arr, size, key, s, e, ans) == -1) return 0;
+    int total = lastOccurrence(arr, size, key, s, e, ans) - firstOccurrence(arr, size, key, s, e, ans) + 1;
+
+    return total;
+}
+
+//Peak in a mountain
+int peakMountain (int* arr, int size, int s, int e) {
+
+}
 
 int main() {
 int arr[] = {2,3, 6, 6, 6, 8, 8, 9, 9, 10};
@@ -120,10 +151,16 @@ int n = sizeof(arr)/sizeof(int);
 // else cout << "Not yoooo!";
 
 //first occurence
-int key = 0;
+int key = 8;
 
 cout << "By loop: " << firstOccurence_loops (arr, n, key) << endl;
-cout << "By recursion: " << firstOccurrence (arr, n, key, 0, n-1) << endl;
+cout << "By recursion: " << firstOccurrence (arr, n, key, 0, n-1) << endl << endl;
+
+
+cout << "By recursion: " << lastOccurrence (arr, n, key, 0, n-1) << endl << endl;
+
+
+cout << "By recursion: " << totalOccurence (arr, n, key, 0, n-1) << endl;
 
 
 }
