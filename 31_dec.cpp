@@ -173,10 +173,72 @@ int pivotIndex (int* arr, int size, int s, int e) {
     }
 }
 
-int main() {
-int arr[] = { 1, 2, 3, 7, 9};
-int n = sizeof(arr)/sizeof(int);
+//square root by recursion
+int sqr (int n, int s, int e, int ans = -1) {
+ 
+    int mid = s + (e-s)/2;
+    if (s > e) {
+        return ans;
+    }
 
+    if (mid*mid <= n) {
+        ans = mid;
+        return sqr(n, mid+1, e, ans);
+    }
+
+    if (mid*mid > n) {
+        return sqr (n, s, mid-1, ans);
+    } 
+}
+
+bool isPossible2 (int* arr, int size, int student, int mid) {
+    int stuCount = 1;
+    int sum = 0;
+    int i = 0;
+
+    while (i < size) {
+        if (arr[i]+sum <= mid) {
+            sum += arr[i];
+            i++;
+        }
+        else {
+            stuCount++;
+            sum = arr[i];
+            i++;
+            if (stuCount > student || sum > mid) return false;
+        }
+    }
+    return true;
+}
+//Book Allocation Problem
+int minPage (int* arr, int size, int s, int e, int student, int ans = -1) {
+
+    int mid = s + (e-s)/2;
+
+    if (s > e) {
+        return ans;
+    }
+
+    if (isPossible2(arr, size, student, mid)) {
+        ans = mid;
+        return minPage (arr, size, s, mid-1, student, ans);
+    }
+
+    else {
+        return minPage(arr, size, mid+1, e, student, ans);
+    }
+}
+
+//Aggresive Cows
+
+
+int main() {
+int arr[] = {10, 20, 30, 40};
+int n = sizeof(arr)/sizeof(int);
+int sum = 0;
+for (int i = 0; i < n ; i++) {
+    sum += arr[i];
+}
 // if (isSorted(arr, 3)) cout << "yeahhh!" << endl;
 // else cout << "Not yeahhh!!" << endl;
 // cout << "Sum: " << getSum(arr, 3);
@@ -185,22 +247,17 @@ int n = sizeof(arr)/sizeof(int);
 
 // if (binarySearch(arr, 3, 5, 0, 2)) cout << "yoo!";
 // else cout << "Not yoooo!";
-
 //first occurence
 // int key = 8;
-
 // cout << "By loop: " << firstOccurence_loops (arr, n, key) << endl;
 // cout << "By recursion: " << firstOccurrence (arr, n, key, 0, n-1) << endl << endl;
-
-
 // cout << "By recursion: " << lastOccurrence (arr, n, key, 0, n-1) << endl << endl;
-
-
 // cout << "By recursion: " << totalOccurence (arr, n, key, 0, n-1) << endl;
-
 // cout << "Peak index: " << peakMountain(arr, n, 0, n-1) << endl;
-
-cout << "Pivot Index: " << pivotIndex(arr, n, 0, n-1) << endl;
+// cout << "Pivot Index: " << pivotIndex(arr, n, 0, n-1) << endl;
+// int x = 5;
+// cout << "Sqr root: " << sqr(x, 0, x) << endl;
+// cout << "Min. Pages: " << minPage(arr, n, 0, sum, 2 ) << endl;
 
 
 }
