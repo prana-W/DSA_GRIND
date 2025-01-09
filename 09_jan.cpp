@@ -92,7 +92,41 @@ void mergeSort (int *arr, int s, int e) {
 }
 
 //Quick Sort
-void quickSort () {
+int partition (int* arr, int s , int e) {
+    int p = arr[s];
+    int cnt = 0; // keeps track of number of elements less than p
+
+    for (int i = s+1; i <= e; i++) {
+        if (arr[i] <= p) cnt++;
+    }
+
+    int pivotIndex = s+cnt;
+
+    swap (arr[s], arr[pivotIndex]);
+
+    int i = s;
+    int j = e;
+
+    while (i < pivotIndex && j > pivotIndex) {
+        while (arr[i] <= p) i++;
+        while (arr[j] > p) j--;
+
+        if (arr[i] > p && arr[j] <= p && i < pivotIndex && j > pivotIndex) {
+            swap (arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    return pivotIndex;
+}
+void quickSort (int* arr, int s, int e) {
+    if (s >= e) return; //base case
+
+    int p = partition (arr, s, e);
+
+    quickSort(arr, s, p-1);
+    quickSort(arr, p+1, e);
 
 }
 
@@ -101,5 +135,6 @@ int main() {
     int arr[5] = {89, -56, -896, 0, 5};
 
     //mergeSort(arr, 0, 4);
+    quickSort(arr, 0, 4);
     printArr (arr, 5);
 }
